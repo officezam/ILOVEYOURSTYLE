@@ -1,0 +1,76 @@
+{
+  "menu": [
+    {
+      "name": "Dashboard",
+      "url": "dashboard/analytics",
+      "badgeClass": "badge badge-light-warning badge-pill ml-auto mr-1",
+      "icon": "home",
+      "slug": ""
+    },
+    {
+      "name": "Contacts",
+      "slug": "",
+      "icon": "star",
+      "submenu": [
+        {
+          "url": "contacts/all-contacts",
+          "name": "All Contacts",
+          "icon": "circle",
+          "slug": "All-Contacts"
+        },
+        {
+          "url": "contacts/allList",
+          "name": "List",
+          "icon": "circle",
+          "slug": "contacts-List"
+        }
+      ]
+    },
+    {
+      "name": "SMS",
+      "slug": "",
+      "icon": "sunrise",
+      "submenu": [
+        {
+          "url": "sms/sms-list",
+          "name": "All SMS",
+          "icon": "circle",
+          "slug": "sms-list"
+        },
+        {
+          "url": "sms/new-sms",
+          "name": "New SMS",
+          "icon": "circle",
+          "slug": "new-sms"
+        },
+        {
+          "url": "sms/bulk-sms",
+          "name": "Bulk SMS",
+          "icon": "circle",
+          "slug": "bulk-sms"
+        }
+      ]
+    },
+
+    {
+      "name": "Voice",
+      "slug": "",
+      "icon": "sunrise",
+      "submenu": [
+        {
+          "url": "voice/voice-list",
+          "name": "All Voice",
+          "icon": "circle",
+          "slug": "voice-list"
+        },
+        {
+          "url": "voice/send-voice",
+          "name": "Send Voice",
+          "icon": "circle",
+          "slug": "send-voice"
+        }
+      ]
+    }
+]
+
+}
