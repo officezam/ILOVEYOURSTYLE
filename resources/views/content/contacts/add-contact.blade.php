@@ -23,7 +23,7 @@
             </div>
           @endif
          --}}
-          <form class="form" action="{{url('save-contact')}}" method="POST"  >
+          <form class="form" action="{{url('contacts/save-contact')}}" method="POST"  >
             @csrf
             <input name="created_by_id" type="hidden" value="1"  >
             <input name="compaign_id" type="hidden" value="1"  >
