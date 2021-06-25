@@ -120,6 +120,7 @@
                     <input type="file" name="listname" value="" class="custom-file-input" id="customFile" />
                     <label class="custom-file-label" for="customFile">Choose Stylesheet</label>
                   </div>
+                  <a href=" {{ url('/') }}/OverpassSampleSpreadsheet.xlsx" download>Download Sample Format</a>
                   @error('listname')
                   <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
