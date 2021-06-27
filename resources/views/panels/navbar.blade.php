@@ -299,15 +299,15 @@
               {{--<i class="mr-50" data-feather="power"></i> Logout--}}
             {{--</a>--}}
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST"  class="dropdown-item">
+            {{--<form id="logout-form" action="{{ route('logout') }}" method="POST"  class="dropdown-item">
               <input name="_token" type="hidden" value="{{ csrf_token() }}"  >
 
               <button type="submit" > <i class="mr-50" data-feather="power"></i> Logout</button>
-            </form>
+            </form>--}}
             @else
-              <a class="dropdown-item" href="{{url('/login')}}">
+             {{-- <a class="dropdown-item" href="{{url('/login')}}">
               <i class="mr-50" data-feather="off"></i> Login
-              </a>
+              </a>--}}
             @endif
 
 

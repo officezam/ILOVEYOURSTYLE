@@ -15,6 +15,8 @@ use App\Imports\CsvImport;
 use Maatwebsite\Excel\Reader;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ListModel;
+use Auth;
+
 
 class ContactsController extends Controller
 {
@@ -57,15 +59,23 @@ class ContactsController extends Controller
             'mobile_phone' => 'required|unique:Contacts|max:255',
             'work_phone' => 'required|unique:Contacts|max:255',
             'company_name' => 'required|max:255',
-            'email' => 'required|unique:Contacts|max:255',
+            'email' => 'required|max:255',
         ]);
 
         if ($validData->fails())
         {
             return redirect()->back()->withErrors($validData->errors())->withInput();
-
         }else{
-            Contacts::create($request->all());
+            Contacts::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'home_phone' => '+1'.(int)str_replace("-", "",$request->home_phone),
+                'mobile_phone' => '+1'.(int)str_replace("-", "",$request->mobile_phone),
+                'work_phone' => '+1'.(int)str_replace("-", "",$request->work_phone),
+                'company_name' => $request->company_name,
+                'email' => $request->email,
+                'created_by_id' => Auth::id(),
+            ]);
         }
 
         //Call Json file Function
@@ -107,11 +117,15 @@ class ContactsController extends Controller
         $validData =  \Validator::make($request->all(),[
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'home_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
-            'mobile_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
-            'work_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
+            ///'home_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
+            //'mobile_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
+            //'work_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
+            'home_phone' => 'required|max:255',
+            'mobile_phone' => 'required|max:255',
+            'work_phone' => 'required|max:255',
             'company_name' => 'required|max:255',
-            'email' => 'required|email|unique:Contacts,id,' . $request->id,
+            //'email' => 'required|email|unique:Contacts,id,' . $request->id,
+            'email' => 'required|email',
         ]);
 
         if ($validData->fails())
@@ -122,7 +136,18 @@ class ContactsController extends Controller
 
             $input = $request->all();
             $Contacts = Contacts::findOrFail($request->id);
-            $Contacts->fill($input)->save();
+            $Contacts->fill(
+                [
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'home_phone' => '+1'.(int)str_replace("-", "",$request->home_phone),
+                    'mobile_phone' => '+1'.(int)str_replace("-", "",$request->mobile_phone),
+                    'work_phone' => '+1'.(int)str_replace("-", "",$request->work_phone),
+                    'company_name' => $request->company_name,
+                    'email' => $request->email,
+                    'created_by_id' => Auth::id(),
+                ]
+            )->save();
 
             //Session::flash('flash_message', 'Contact successfully updated!');
         }

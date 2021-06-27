@@ -67,7 +67,7 @@
                       <a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown"><i data-feather='edit'></i></a>
 
                       <div class="dropdown-menu dropdown-menu-right">
-                        <a href="/voice/delete-voice/"{{ $product->id  }} class="dropdown-item delete-record">Delete</a>
+                        <a href="/voice/delete-voice/{{ $product->id  }}" class="dropdown-item delete-record">Delete</a>
                       </div>
                     </div>
 
