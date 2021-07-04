@@ -16,6 +16,7 @@ use Maatwebsite\Excel\Reader;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ListModel;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class ContactsController extends Controller
@@ -69,12 +70,12 @@ class ContactsController extends Controller
             Contacts::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'home_phone' => '+1'.(int)str_replace("-", "",$request->home_phone),
-                'mobile_phone' => '+1'.(int)str_replace("-", "",$request->mobile_phone),
-                'work_phone' => '+1'.(int)str_replace("-", "",$request->work_phone),
+                'home_phone' => (int)str_replace("-", "",$request->home_phone),
+                'mobile_phone' => (int)str_replace("-", "",$request->mobile_phone),
+                'work_phone' => (int)str_replace("-", "",$request->work_phone),
                 'company_name' => $request->company_name,
                 'email' => $request->email,
-                'created_by_id' => Auth::id(),
+                'created_by_id' => 1,
             ]);
         }
 
@@ -140,9 +141,9 @@ class ContactsController extends Controller
                 [
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
-                    'home_phone' => '+1'.(int)str_replace("-", "",$request->home_phone),
-                    'mobile_phone' => '+1'.(int)str_replace("-", "",$request->mobile_phone),
-                    'work_phone' => '+1'.(int)str_replace("-", "",$request->work_phone),
+                    'home_phone' => (int)str_replace("-", "",$request->home_phone),
+                    'mobile_phone' => (int)str_replace("-", "",$request->mobile_phone),
+                    'work_phone' => (int)str_replace("-", "",$request->work_phone),
                     'company_name' => $request->company_name,
                     'email' => $request->email,
                     'created_by_id' => Auth::id(),
