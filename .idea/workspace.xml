@@ -38,8 +38,8 @@
       <file leaf-file-name="nginx.conf" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.platform/nginx/nginx.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="136">
+              <caret line="8" column="69" lean-forward="true" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -98,7 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SMS</find>
       <find>call</find>
       <find>select2</find>
       <find>make-call</find>
@@ -128,6 +127,7 @@
       <find>jquery.dataTables.min.js</find>
       <find>contact-list.js</find>
       <find>all-list.js</find>
+      <find>example.com</find>
     </findStrings>
     <replaceStrings>
       <replace>contact-lis</replace>
@@ -137,6 +137,7 @@
       <replace>Picture</replace>
       <replace>picture</replace>
       <replace>picture_link</replace>
+      <replace>amirlaravel.ap-south-1.elasticbeanstalk.com</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\antoine900\admin\public\js</dir>
@@ -510,12 +511,12 @@
       <workItem from="1625477279281" duration="608000" />
       <workItem from="1625481096190" duration="2187000" />
       <workItem from="1625559932076" duration="2581000" />
-      <workItem from="1625571920629" duration="5079000" />
+      <workItem from="1625571920629" duration="5690000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="308151000" />
+    <option name="totallyTimeSpent" value="308762000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -897,8 +898,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.platform/nginx/nginx.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="136">
+          <caret line="8" column="69" lean-forward="true" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
           <folding />
         </state>
       </provider>
