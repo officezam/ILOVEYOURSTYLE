@@ -47,11 +47,4 @@ class Excel extends Facade
     {
         return 'excel';
     }
-
-
-
-
-
-
-
 }
