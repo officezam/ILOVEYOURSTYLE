@@ -29,6 +29,8 @@ class ContactsController extends Controller
      * */
     public function FetchAll()
     {
+        //Call Json file Function
+        $this->CreateJsonFile();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "All Contact List"]];
         return view('/content/contacts/contacts-List', ['breadcrumbs' => $breadcrumbs ]);
     }
