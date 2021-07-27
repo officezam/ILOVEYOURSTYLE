@@ -18,12 +18,13 @@ class CallController extends Controller
 
 
 
-    public function __construct()
-    {
+  public function __construct()
+  {
         //getenv("TWILIO_SID"), getenv("TWILIO_AUTH_TOKEN")
+      $this->clientToken= new ClientToken(getenv("TWILIO_SID"), getenv("TWILIO_AUTH_TOKEN"));
+  }
 
-        $this->clientToken= new ClientToken(getenv("TWILIO_SID"), getenv("TWILIO_AUTH_TOKEN"));
-    }
+
 
 
     /*
@@ -34,7 +35,7 @@ class CallController extends Controller
     {
         //$this->CreateJsonFile();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Call"], ['name' => "All Calls"]];
-        return view('/content/call/call-List', ['breadcrumbs' => $breadcrumbs ]);
+        return view('/content/call/call-list', ['breadcrumbs' => $breadcrumbs ]);
     }
 
 
@@ -49,7 +50,7 @@ class CallController extends Controller
         //dd($ClientToken);
         $AllContact = Contacts::all();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Call"], ['name' => "Mak a Call"]];
-        return view('/content/call/new-call', ['breadcrumbs' => $breadcrumbs , 'AllContact' => $AllContact  ]);
+        return view('/content/call/new-call', ['breadcrumbs' => $breadcrumbs , 'AllContact' => $AllContact, 'ClientToken' => $ClientToken ]);
     }
 
 

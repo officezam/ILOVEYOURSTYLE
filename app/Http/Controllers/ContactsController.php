@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use App\Models\Contact;
 use App\Models\Contacts;
 use Illuminate\Validation;
 use Illuminate\Http\Response;
@@ -16,7 +17,6 @@ use Maatwebsite\Excel\Reader;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ListModel;
 use Auth;
-use Illuminate\Support\Facades\DB;
 
 
 class ContactsController extends Controller
@@ -34,6 +34,19 @@ class ContactsController extends Controller
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "All Contact List"]];
         return view('/content/contacts/contacts-List', ['breadcrumbs' => $breadcrumbs ]);
     }
+
+    /*
+     * All contact list Fetch
+     *
+     * */
+    public function FetchListData($id)
+    {
+       $this->CreateJsonFileofList($id);
+        $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "All Contact List"]];
+        return view('/content/contacts/list-data', ['breadcrumbs' => $breadcrumbs ]);
+    }
+
+
 
 
     /*
@@ -58,9 +71,9 @@ class ContactsController extends Controller
         $validData =  \Validator::make($request->all(),[
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'home_phone' => 'required|unique:Contacts|max:255',
-            'mobile_phone' => 'required|unique:Contacts|max:255',
-            'work_phone' => 'required|unique:Contacts|max:255',
+            'home_phone' => 'required|unique:Contact|max:255',
+            'mobile_phone' => 'required|unique:Contact|max:255',
+            'work_phone' => 'required|unique:Contact|max:255',
             'company_name' => 'required|max:255',
             'email' => 'required|max:255',
         ]);
@@ -69,7 +82,7 @@ class ContactsController extends Controller
         {
             return redirect()->back()->withErrors($validData->errors())->withInput();
         }else{
-            Contacts::create([
+            Contact::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'home_phone' => (int)str_replace("-", "",$request->home_phone),
@@ -87,7 +100,7 @@ class ContactsController extends Controller
         $AllList = ListModel::all();
 
         $breadcrumbs = [
-            ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "Add Contact"]
+            ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contact"], ['name' => "Add Contact"]
         ];
         return view('/content/contacts/contacts-List', [
             'breadcrumbs' => $breadcrumbs, 'AllList' => $AllList
@@ -120,14 +133,14 @@ class ContactsController extends Controller
         $validData =  \Validator::make($request->all(),[
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            ///'home_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
-            //'mobile_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
-            //'work_phone' => 'required|max:255|unique:Contacts,id,'. $request->id,
+            ///'home_phone' => 'required|max:255|unique:Contact,id,'. $request->id,
+            //'mobile_phone' => 'required|max:255|unique:Contact,id,'. $request->id,
+            //'work_phone' => 'required|max:255|unique:Contact,id,'. $request->id,
             'home_phone' => 'required|max:255',
             'mobile_phone' => 'required|max:255',
             'work_phone' => 'required|max:255',
             'company_name' => 'required|max:255',
-            //'email' => 'required|email|unique:Contacts,id,' . $request->id,
+            //'email' => 'required|email|unique:Contact,id,' . $request->id,
             'email' => 'required|email',
         ]);
 
@@ -148,18 +161,18 @@ class ContactsController extends Controller
                     'work_phone' => (int)str_replace("-", "",$request->work_phone),
                     'company_name' => $request->company_name,
                     'email' => $request->email,
-                    'created_by_id' => Auth::id(),
+                    'created_by_id' => 1,
                 ]
             )->save();
 
-            //Session::flash('flash_message', 'Contact successfully updated!');
+            //Session::flash('flash_message', 'Contacts successfully updated!');
         }
 
         //Call Json file Function
         $this->CreateJsonFile();
 
         $breadcrumbs = [
-            ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "Add Contact"]
+            ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "Contact List"]
         ];
         return view('/content/contacts/contacts-List', [
             'breadcrumbs' => $breadcrumbs
@@ -209,9 +222,11 @@ class ContactsController extends Controller
         /*
         * All Contact table json formate file save
         */
-        $ContactsList = '{ "data":'.json_encode(Contacts::all()).'}';
+        $ContactsList = '{ "data":'.json_encode(Contacts::where('list_id', '=' ,0)->get() , JSON_PRETTY_PRINT).'}';
+        //dd($ContactsList);
         //$newJsonString = json_encode(Contacts::all(), JSON_PRETTY_PRINT);
         $respose =  file_put_contents(base_path('public/data/contact-list.json'), stripslashes($ContactsList));
+        //dd($respose);
 
     }
 
@@ -245,6 +260,7 @@ class ContactsController extends Controller
     public function StoreList(Request $request)
     {
 
+
         $validData =  Validator::make($request->all(),[
             'listtype' => 'required',
             'listname' => 'required|file|mimes:xls,xlsx',
@@ -260,10 +276,13 @@ class ContactsController extends Controller
                 'created_by_id' => $request->created_by_id,
                 'remember_token' =>  $request->_token,
             ];
-            $ListId = ListModel::create($ListData);
-
+            $ListId = ListModel::create($ListData)->id;
+           // dd($ListId->id);
            // $path = $request->file('listname')->getRealPath();
-            $theCollection = Excel::import(new CsvImport(), $request->file('listname'));
+            $import = new CsvImport;
+            $theCollection = Excel::import($import, $request->file('listname'));
+            $getRowCount = $import->getRowCount();
+            $LastCreated = Contacts::orderBy('created_at', 'desc')->limit($getRowCount)->update(['list_id' => $ListId]);
             //Call Json file Function
             $this->CreateJsonFileofcontact();
         }
@@ -279,11 +298,25 @@ class ContactsController extends Controller
         * All Contact table json formate file save
         */
         $ContactsList = '{ "data":'.json_encode(Contacts::where('list_id', '>' ,0)->get()).'}';
-        //dd(Contacts::where('list_id', '>', 0)->get());
+        //dd(Contact::where('list_id', '>', 0)->get());
         //$newJsonString = json_encode(Contacts::all(), JSON_PRETTY_PRINT);
         $respose =  file_put_contents(base_path('public/data/All-list.json'), stripslashes($ContactsList));
 
     }
+
+    public function CreateJsonFileofList($id )
+    {
+        /*
+        * All Contact table json formate file save
+        */
+        $ContactsList = '{ "data":'.json_encode(Contacts::where('list_id', '=' ,$id)->get()).'}';
+
+        //dd(Contact::where('list_id', '>', 0)->get());
+        //$newJsonString = json_encode(Contacts::all(), JSON_PRETTY_PRINT);
+        $respose =  file_put_contents(base_path('public/data/All-list.json'), stripslashes($ContactsList));
+
+    }
+
 
 
     public function ContactListDetail($id)
@@ -297,6 +330,17 @@ class ContactsController extends Controller
     }
 
 
+    public function Deletelist($id)
+    {
+        $Contacts = Contacts::where('list_id', $id)->delete();
+
+        $Contacts = ListModel::findOrFail($id);
+        $Contacts->delete();
+
+        $AllList = ListModel::all();
+        $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "List"], ['name' => "All Contact List"]];
+        return view('/content/contacts/all-List', ['breadcrumbs' => $breadcrumbs, 'AllList' => $AllList ]);
+    }
 
 
 

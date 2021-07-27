@@ -18,6 +18,11 @@ class CsvImport implements ToModel, WithStartRow
 //        return $collection; //add this line
 //    }
 
+
+
+
+    private $rows = 0;
+
     /**
      * @param array $row
      *
@@ -25,14 +30,15 @@ class CsvImport implements ToModel, WithStartRow
      */
     public function model(array $row)
     {
+        ++$this->rows;
         return new Contacts([
             //
             'first_name'     => @$row[0],
             'last_name'    => @$row[1],
             'company_name'    => @$row[2],
-            'home_phone'    => @'+1'.(int)str_replace("-", "", $row[3]),
-            'work_phone'    => @'+1'.(int)str_replace("-", "", $row[4]),
-            'mobile_phone'    => @'+1'.(int)str_replace("-", "", $row[5]),
+            'home_phone'    => @(int)str_replace("-", "", $row[3]),
+            'work_phone'    => @(int)str_replace("-", "", $row[4]),
+            'mobile_phone'    => @(int)str_replace("-", "", $row[5]),
             'email'    => @$row[6],
             'compaign_id'    => 1,
             'created_by_id'    => 1,
@@ -65,7 +71,10 @@ class CsvImport implements ToModel, WithStartRow
     }
 
 
-
+    public function getRowCount(): int
+    {
+        return $this->rows;
+    }
 
 
 

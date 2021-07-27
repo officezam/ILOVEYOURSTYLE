@@ -3,6 +3,7 @@
  */
 
 $(function () {
+    alert('resource');
   'use strict';
 
   var dt_basic_table = $('.datatables-basic'),

@@ -8,7 +8,7 @@ use App\Models\SMSModel;
 use Twilio\Rest\Client;
 use Illuminate\Session;
 use App\Models\ListModel;
-
+use Propaganistas\LaravelPhone\PhoneNumber;
 
 class SMSController extends Controller
 {
@@ -21,7 +21,7 @@ class SMSController extends Controller
     {
         $this->CreateJsonFile();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "SMS"], ['name' => "All SMS"]];
-        return view('/content/sms/sms-List', ['breadcrumbs' => $breadcrumbs ]);
+        return view('/content/sms/sms-list', ['breadcrumbs' => $breadcrumbs ]);
     }
 
 
@@ -43,16 +43,22 @@ class SMSController extends Controller
     public function StoreSMS(Request $request)
     {
         $message    = $request->sms_text;
-        $ToPhone = '+923007272332';//$request->ToPhone;
+        $ToPhone    = '+'.$request->ToPhone;
+       // $ToPhone = PhoneNumber::make($ToPhone, 'BE')->getCountry();
+        //PhoneNumber::make('012/34.56.78', 'BE')->formatNational();
+        //$ToPhone = (string) PhoneNumber::make($ToPhone, 'BE');
+        //$ToPhone = (string) PhoneNumber::make($ToPhone);              // +3212345678
+        //$ToPhone = (string) PhoneNumber::make($ToPhone, 'BE');          // +3212345678
+        //$ToPhone = (string) PhoneNumber::make($ToPhone)->ofCountry('BE');  // +3212345678
+       // dd($ToPhone);
         $response =  $this->sendMessage($message, $ToPhone);
-
 
         $SMS = new SMSModel;
         $SMS->from       = getenv("TWILIO_NUMBER");
         $SMS->to         = $ToPhone;
         $SMS->Message    = $message;
         $SMS->MessageSid = $response->sid;
-        $SMS->status     = $response->status;
+        $SMS->status     = 'Sent';//$response->status;
         $SMS->save();
 
         $this->CreateJsonFile();
@@ -69,11 +75,14 @@ class SMSController extends Controller
      */
     private function sendMessage($message, $recipients)
     {
-        $account_sid = getenv("TWILIO_SID");
+        $account_sid = getenv("TWILIO_ACCOUNT_SID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
         $twilio_number = getenv("TWILIO_NUMBER");
-        $client = new Client($account_sid, $auth_token);
-        return $client->messages->create($recipients,
+        //$TWILIO_NOTIFY_SID = getenv("TWILIO_NOTIFY_SID");
+
+        $twilio = new Client( $account_sid, $auth_token);
+
+        return $twilio->messages->create($recipients,
             ['from' => $twilio_number, 'body' => $message] );
     }
 

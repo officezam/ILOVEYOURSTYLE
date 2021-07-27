@@ -21,7 +21,7 @@ $(function () {
             dateFormat: 'm/d/Y'
         });
     }
-
+        alert( assetPath + 'data/contact-list.json');
 
     // Multilingual DataTable
     // --------------------------------------------------------------------
@@ -40,7 +40,7 @@ $(function () {
                 { data: 'work_phone' },
                 { data: '' }
             ],
-            
+
             columnDefs: [
                 {
                     // For Responsive

@@ -53,7 +53,7 @@
                   <td>{{ $product->voice_to  }}</td>
                   <td>{{  'True' }}</td>
                   <td>
-                    <audio controls autoplay>
+                    <audio controls autostart="false">
                       <source src="{{ $product->voiceAudio  }}" type="audio/ogg">
                       <source src="{{ $product->voiceAudio  }}" type="audio/mpeg">
                       Your browser does not support the audio element.

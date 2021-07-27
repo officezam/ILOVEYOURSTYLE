@@ -51,7 +51,8 @@
                   <td>{{ $product->picture_from  }}</td>
                   <td>{{ $product->picture_to  }}</td>
                   <td>
-                    {{ $product->picture_link  }}
+                    <a href="{{ URL::asset('$product->picture_link')  }}" target="_blank">View Image</a>
+
                   </td>
                   <td>{{ $product->picture_text  }}</td>
                   <td>{{ $product->status  }}</td>

@@ -95,7 +95,7 @@ class PictureController extends Controller
 
             $file->move($destinationPath,$filename);
         }
-        $pathofpicture = URL::asset('uploads/'.$filename);
+        $pathofpicture = URL::asset('uploads/picture/'.$filename);
 
         $ListData = [
             'picture_from' => $this->from,
@@ -134,7 +134,7 @@ class PictureController extends Controller
     {
         // $phone_number = '+923007272332';
         //Lookup phone number to make sure it is valid before initiating call
-        //$phone_number = $this->client->lookups->v1->phoneNumbers($phone_number)->fetch();
+        $phone_number = $this->client->lookups->v1->phoneNumbers($ToPhone)->fetch();
         try {
             // If phone number is valid and exists
             if($ToPhone) {
@@ -145,12 +145,12 @@ class PictureController extends Controller
                     'from' => $this->from,
                     'body' => $pictureText
                 );
-//                if ($PicturePath) {
-//                    $messageParams['mediaUrl'] = $PicturePath;
-//                }
+                if ($PicturePath) {
+                    $messageParams['mediaUrl'] = $PicturePath;
+                }
 
                 $PictureMessage =$this->client->messages->create(
-                    $ToPhone,
+                    '+'.$ToPhone,
                     $messageParams
                 );
 

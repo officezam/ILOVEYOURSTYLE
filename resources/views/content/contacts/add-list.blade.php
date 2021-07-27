@@ -36,13 +36,13 @@
             <div class="row">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Do you want to create a new list or to add to an existing list?</h4>
+                  <h4 class="card-title">Upload and Create a new Contacts list </h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body hidden">
                   {{--  <p class="card-text mb-0">
                       Do you want to create a new list or to add to an existing list?
                     </p>--}}
-                  <div class="demo-inline-spacing">
+                  <div class="demo-inline-spacing ">
                     <div class="custom-control custom-radio">
                       <input type="radio" id="customRadio1" name="listtype" class="custom-control-input" checked value="newlist" />
                       <label class="custom-control-label" for="customRadio1">Create New List</label>
@@ -56,7 +56,7 @@
               </div>
               <div class="col-md-6 col-12">
                 <!-- Remote Data -->
-                <div class="form-group" id="savedlist" style="display: none">
+                <div class="form-group hidden" id="savedlist" style="display: none">
                   <label>Choose Contact List</label>
                   <select class="select2 form-control" name="savedlist" id="savedlistoption">
                     <option value="CT">Connecticut</option>
@@ -85,7 +85,7 @@
                   @enderror
                 </div>
 
-                <div class="form-group" id="compaignlist">
+                <div class="form-group hidden" id="compaignlist">
                   <label>Update a campaign with the contacts?</label>
                   <select class="select2 form-control" name="campaign" id="campaign">
                     <option value="CT">Connecticut</option>
@@ -120,7 +120,7 @@
                     <input type="file" name="listname" value="" class="custom-file-input" id="customFile" />
                     <label class="custom-file-label" for="customFile">Choose Stylesheet</label>
                   </div>
-                  <a href=" {{ url('/') }}/OverpassSampleSpreadsheet.xlsx" download>Download Sample Format</a>
+                  <a href=" {{ url('/') }}/Sample_Formate.xlsx" download>Download Sample Format</a>
                   @error('listname')
                   <div class="alert alert-danger">{{ $message }}</div>
                   @enderror

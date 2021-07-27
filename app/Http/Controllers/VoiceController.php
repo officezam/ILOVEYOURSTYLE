@@ -73,23 +73,23 @@ class VoiceController extends Controller
             $file = $request->file('voiceAudio');
 
             //Display File Name
-            echo 'File Name: '.$file->getClientOriginalName();
+          //  echo 'File Name: '.$file->getClientOriginalName();
 
 
             //Display File Extension
-            echo 'File Extension: '.$file->getClientOriginalExtension();
-            echo '<br>';
+           // echo 'File Extension: '.$file->getClientOriginalExtension();
+          //  echo '<br>';
 
             //Display File Real Path
-            echo 'File Real Path: '.$file->getRealPath();
-            echo '<br>';
+          //  echo 'File Real Path: '.$file->getRealPath();
+          //  echo '<br>';
 
             //Display File Size
-            echo 'File Size: '.$file->getSize();
-            echo '<br>';
+         //   echo 'File Size: '.$file->getSize();
+         //   echo '<br>';
 
             //Display File Mime Type
-            echo 'File Mime Type: '.$file->getMimeType();
+         //   echo 'File Mime Type: '.$file->getMimeType();
 
             //Move Uploaded File
             $destinationPath = 'uploads';
@@ -133,20 +133,19 @@ class VoiceController extends Controller
 
     public function initiateCall($ToPhone,$VoiceXmlPath)
     {
-       // $phone_number = '+923007272332';
-        //Lookup phone number to make sure it is valid before initiating call
-        //$phone_number = $this->client->lookups->v1->phoneNumbers($phone_number)->fetch();
+
         try {
             // If phone number is valid and exists
             if($ToPhone) {
-                // Initiate call and record call
-                $call = $this->client->account->calls->create(
-                    $ToPhone, // Destination phone number
-                    $this->from, // Valid Twilio phone number
+
+                $call =$this->client->account->calls->create(
+                    '+'.$ToPhone,
+                    $this->from,
                     array(
-                        "record" => True,
-                        "url" => $VoiceXmlPath));
-                       // "url" => "https://demo.twilio.com/docs/voice.xml")); for test
+                        //"url" => $VoiceXmlPath
+                         "url" => "https://demo.twilio.com/docs/voice.xml"
+                    )
+                );
 
                 if($call) {
                     echo 'Call initiated successfully';

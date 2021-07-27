@@ -52,7 +52,8 @@ Route::group(['prefix' => 'contacts'], function () {
     Route::post('save-contact-list', [ContactsController::class,'StoreList'])->name('save-contact-list');
     Route::get('contact-list-detail/{id}', [ContactsController::class,'ContactListDetail'])->name('contact-list-detail');
 
-
+    Route::get('list-data/{id}', [ContactsController::class,'FetchListData'])->name('list-data');
+    Route::get('delete-list/{id}', [ContactsController::class,'Deletelist'])->name('delete-list');
 });
 /* Route contacts */
 

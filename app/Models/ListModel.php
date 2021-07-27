@@ -14,7 +14,7 @@ class ListModel extends Model
      *
      * @var string
      */
-    protected $table = 'List';
+    protected $table = 'list';
     protected $fillable = ['list_name', 'compaign_id', 'created_by_id'];
 
 

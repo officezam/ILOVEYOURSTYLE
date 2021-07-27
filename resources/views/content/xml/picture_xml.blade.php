@@ -1,5 +1,4 @@
-
-<?xml version="1.0" encoding="UTF-8"?>
+<?php echo'<?xml version="1.0" encoding="UTF-8"?>' ?>
     <Response>
         <Message>
             <Body>{{ $PictureData->picture_text }</Body>

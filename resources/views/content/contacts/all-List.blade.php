@@ -47,17 +47,17 @@
               <tbody>
               @foreach ($AllList as $product)
                 <tr>
-                  <td>{{ $product->list_name  }}</td>
-                  <td>{{ $product->created_by_id  }}</td>
-                  <td>{{ count($AllList)  }}</td>
+                  <td><a href="{{ route('list-data' ,  ['id' => $product->id ]) }}"> {{ $product->list_name  }} </a></td>
+                  <td> Admin </td>
+                  <td>{{ count($AllList)  }} </td>
                   <td>{{ $product->created_at  }}</td>
                   <td>
 
                     <div class="d-inline-flex">
                       <a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown"><i data-feather='edit'></i></a>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{ $product->id  }}" class="dropdown-item">Details</a>
-                        <a href="/contacts/delete-contact/"{{ $product->id  }} class="dropdown-item delete-record">Delete</a>
+                        <a href="{{ route('list-data' ,  ['id' => $product->id ]) }}" class="dropdown-item">Details</a>
+                        <a href="/contacts/delete-list/{{ $product->id  }}" class="dropdown-item delete-record">Delete</a>
                       </div>
                     </div>
 
