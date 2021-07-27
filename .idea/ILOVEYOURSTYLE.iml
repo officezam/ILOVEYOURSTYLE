@@ -15,10 +15,12 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/jetstream" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/sanctum" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mtownsend/response-xml" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pragmarx/google2fa" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sabre/uri" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sabre/xml" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/array-to-xml" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tightenco/ziggy" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -35,10 +37,12 @@
           <root url="file://$MODULE_DIR$/vendor/laravel/jetstream" />
           <root url="file://$MODULE_DIR$/vendor/laravel/sanctum" />
           <root url="file://$MODULE_DIR$/vendor/mobiledetect/mobiledetectlib" />
+          <root url="file://$MODULE_DIR$/vendor/mtownsend/response-xml" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
           <root url="file://$MODULE_DIR$/vendor/pragmarx/google2fa" />
           <root url="file://$MODULE_DIR$/vendor/sabre/uri" />
           <root url="file://$MODULE_DIR$/vendor/sabre/xml" />
+          <root url="file://$MODULE_DIR$/vendor/spatie/array-to-xml" />
           <root url="file://$MODULE_DIR$/vendor/tightenco/ziggy" />
         </CLASSES>
         <SOURCES>
@@ -51,10 +55,12 @@
           <root url="file://$MODULE_DIR$/vendor/laravel/jetstream" />
           <root url="file://$MODULE_DIR$/vendor/laravel/sanctum" />
           <root url="file://$MODULE_DIR$/vendor/mobiledetect/mobiledetectlib" />
+          <root url="file://$MODULE_DIR$/vendor/mtownsend/response-xml" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
           <root url="file://$MODULE_DIR$/vendor/pragmarx/google2fa" />
           <root url="file://$MODULE_DIR$/vendor/sabre/uri" />
           <root url="file://$MODULE_DIR$/vendor/sabre/xml" />
+          <root url="file://$MODULE_DIR$/vendor/spatie/array-to-xml" />
           <root url="file://$MODULE_DIR$/vendor/tightenco/ziggy" />
         </SOURCES>
       </library>

@@ -79,6 +79,7 @@ Route::group(['prefix' => 'voice'], function () {
     Route::get('delete-voice/{id}', [VoiceController::class,'Delete'])->name('delete-voice');
     Route::Post('save-send-voice', [VoiceController::class,'SaveAndSendVoice'])->name('save-send-voice');
     Route::get('voice-xml/{voice_id}', [VoiceController::class,'VoiceXml'])->name('voice-xml');
+    Route::get('voice-xml-response', [VoiceController::class,'Response'])->name('voice-xml-response');
 
     //Route::get('send-voice', [VoiceController::class,'initiateCall'])->name('send-voice');
 

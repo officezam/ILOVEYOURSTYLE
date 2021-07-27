@@ -8,7 +8,7 @@ use App\Models\Voice;
 use App\Models\Contacts;
 use Faker\Core\File;
 use Illuminate\Support\Facades\URL;
-
+use Mtownsend\ResponseXml\Providers\ResponseXmlServiceProvider;
 
 class VoiceController extends Controller
 {
@@ -125,7 +125,14 @@ class VoiceController extends Controller
     public function VoiceXml($voice_id)
     {
         $VoiceData = Voice::findOrFail($voice_id);
-       return response()->view('content/xml/voice_xml', ['VoiceData' => $VoiceData])->header('Content-Type', 'text/xml');
+
+//        $data = [
+//            'Say' => $VoiceData->voice_text,
+//
+//        ];
+//        return response()->xml($data);
+
+        return response()->view('content/xml/voice_xml', ['VoiceData' => $VoiceData])->header('Content-Type', 'text/xml');
     }
 
 
@@ -138,14 +145,32 @@ class VoiceController extends Controller
             // If phone number is valid and exists
             if($ToPhone) {
 
-                $call =$this->client->account->calls->create(
+                /*$call =$this->client->account->calls->create(
                     '+'.$ToPhone,
                     $this->from,
                     array(
                         //"url" => $VoiceXmlPath
                          "url" => "https://demo.twilio.com/docs/voice.xml"
                     )
-                );
+                );*/
+
+
+                $call = $this->client->calls
+                    ->create( '+'.$ToPhone, // to
+                        $this->from, // from
+                        [
+                            "method" => "GET",
+                            "statusCallback" => "http://amir.memarketingmanagement.com/voice/voice-xml-response",
+                            "statusCallbackMethod" => "GET",
+                            "statusCallbackEvent" => ["initiated","answered"],
+                            "url" => $VoiceXmlPath
+                            //"url" => "http://demo.twilio.com/docs/voice.xml"
+                        ]
+                    );
+
+
+
+
 
                 if($call) {
                     echo 'Call initiated successfully';
@@ -166,7 +191,11 @@ class VoiceController extends Controller
     }
 
 
-
+    public  function Response(Request $request)
+    {
+        return true;
+        //dd( $request);
+    }
 
 
 
