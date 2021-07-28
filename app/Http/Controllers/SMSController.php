@@ -19,9 +19,10 @@ class SMSController extends Controller
     * */
     public function FetchAll()
     {
-        $this->CreateJsonFile();
+        //$this->CreateJsonFile();
+        $AllList  = SMSModel::all();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "SMS"], ['name' => "All SMS"]];
-        return view('/content/sms/sms-list', ['breadcrumbs' => $breadcrumbs ]);
+        return view('/content/sms/sms-list', ['breadcrumbs' => $breadcrumbs, 'AllList' => $AllList ]);
     }
 
 
@@ -61,10 +62,10 @@ class SMSController extends Controller
         $SMS->status     = 'Sent';//$response->status;
         $SMS->save();
 
-        $this->CreateJsonFile();
-
+       // $this->CreateJsonFile();
+        $AllList  = SMSModel::all();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "SMS"], ['name' => "New SMS"]];
-        return view('/content/sms/sms-List', ['breadcrumbs' => $breadcrumbs  ]);
+        return view('/content/sms/sms-list', ['breadcrumbs' => $breadcrumbs , 'AllList' => $AllList  ]);
     }
 
 
@@ -93,14 +94,14 @@ class SMSController extends Controller
         $Contacts->delete();
 
         //Call Json file Function
-        $this->CreateJsonFile();
-
+        //$this->CreateJsonFile();
+        $AllList  = SMSModel::all();
         //Session::flash('flash_message', 'Contact successfully deleted!');
 
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "Contact List"]
         ];
-        return view('/content/sms/sms-List', ['breadcrumbs' => $breadcrumbs ]);
+        return view('/content/sms/sms-list', ['breadcrumbs' => $breadcrumbs , 'AllList' => $AllList ]);
     }
 
 
@@ -129,7 +130,7 @@ class SMSController extends Controller
         $response =  $this->SendBulkMessage($message, $ListContacts);
 
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "SMS"], ['name' => "ALL SMS"]];
-        return view('/content/sms/sms-List', ['breadcrumbs' => $breadcrumbs  ]);
+        return view('/content/sms/sms-list', ['breadcrumbs' => $breadcrumbs  ]);
 
 
 
@@ -141,10 +142,10 @@ class SMSController extends Controller
         $SMS->status     = $response->status;
         $SMS->save();
 
-        $this->CreateJsonFile();
-
+        //$this->CreateJsonFile();
+        $AllList = ListModel::all();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "SMS"], ['name' => "New SMS"]];
-        return view('/content/sms/sms-List', ['breadcrumbs' => $breadcrumbs  ]);
+        return view('/content/sms/sms-list', ['breadcrumbs' => $breadcrumbs , 'AllList' => $AllList ]);
     }
 
 

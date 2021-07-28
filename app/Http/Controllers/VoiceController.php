@@ -54,9 +54,9 @@ class VoiceController extends Controller
     {
         $Contacts = Voice::findOrFail($id);
         $Contacts->delete();
-        $AllContact = Contacts::all();
-        $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Voice"], ['name' => "New Voice"]];
-        return view('/content/voice/new-voice', ['breadcrumbs' => $breadcrumbs, 'AllContact' => $AllContact  ]);
+        $AllList = Voice::all();
+        $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Voice"], ['name' => "All Voice"]];
+        return view('/content/voice/all-List', ['breadcrumbs' => $breadcrumbs, 'AllList' => $AllList ]);
     }
 
 

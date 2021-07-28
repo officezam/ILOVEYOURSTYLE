@@ -33,7 +33,44 @@
 
         </div>
         <div class="card-datatable">
-          <table class="sms_data_table table">
+          <table id="AllList" class="dt-multilingual table">
+            <thead>
+            <tr>
+              <th>SMS From</th>
+              <th>SMS To</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>created At</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($AllList as $product)
+              <tr>
+                <td>{{ $product->from }}</td>
+                <td>{{ $product->to  }}</td>
+                <td>{{  $product->Message }}</td>
+                <td>{{  $product->status }}</td>
+                <td>{{ $product->created_at  }}</td>
+                <td>
+                  <a href="/sms/delete-sms/{{ $product->id  }}" class="dropdown-item delete-record">
+                    <i data-feather='delete'></i> Delete</a>
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>SMS From</th>
+              <th>SMS To</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>created At</th>
+              <th>Action</th>
+            </tr>
+            </tfoot>
+          </table>
+         {{-- <table class="sms_data_table table">
             <thead>
             <tr>
 
@@ -45,7 +82,7 @@
               <th>Action</th>
             </tr>
             </thead>
-          </table>
+          </table>--}}
         </div>
       </div>
     </div>
@@ -73,5 +110,6 @@
 @endsection
 @section('page-script')
   {{-- Page js files --}}
-  <script src="{{ asset(mix('js/scripts/sms/all-sms-list.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/contacts/all-list.js')) }}"></script>
+{{--  <script src="{{ asset(mix('js/scripts/sms/all-sms-list.js')) }}"></script>--}}
 @endsection

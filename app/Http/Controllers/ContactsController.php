@@ -30,9 +30,12 @@ class ContactsController extends Controller
     public function FetchAll()
     {
         //Call Json file Function
-        $this->CreateJsonFile();
+       // $this->CreateJsonFile();
+        $AllList = Contacts::where('list_id', '=' ,0)->get();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "All Contact List"]];
-        return view('/content/contacts/contacts-List', ['breadcrumbs' => $breadcrumbs ]);
+        return view('/content/contacts/contacts-List', ['breadcrumbs' => $breadcrumbs , 'AllList' => $AllList ]);
+
+
     }
 
     /*
@@ -41,9 +44,11 @@ class ContactsController extends Controller
      * */
     public function FetchListData($id)
     {
-       $this->CreateJsonFileofList($id);
+//       $this->CreateJsonFileofList($id);
+
+        $AllList = Contacts::where('list_id', '=' ,$id)->get();
         $breadcrumbs = [['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "All Contact List"]];
-        return view('/content/contacts/list-data', ['breadcrumbs' => $breadcrumbs ]);
+        return view('/content/contacts/list-data', ['breadcrumbs' => $breadcrumbs, 'AllList' => $AllList]);
     }
 
 
@@ -95,9 +100,9 @@ class ContactsController extends Controller
         }
 
         //Call Json file Function
-        $this->CreateJsonFile();
+       // $this->CreateJsonFile();
 
-        $AllList = ListModel::all();
+        $AllList = Contacts::all();
 
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contact"], ['name' => "Add Contact"]
@@ -169,13 +174,13 @@ class ContactsController extends Controller
         }
 
         //Call Json file Function
-        $this->CreateJsonFile();
-
+        //$this->CreateJsonFile();
+        $AllList = Contacts::all();
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "Contact List"]
         ];
         return view('/content/contacts/contacts-List', [
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,  'AllList' => $AllList
         ])->withSuccess('Data successfully updated into Contact List');
     }
 
@@ -183,32 +188,29 @@ class ContactsController extends Controller
     public function Delete($id)
     {
         $Contacts = Contacts::findOrFail($id);
-        $Contacts->delete();
-
+        $response = $Contacts->delete();
         //Call Json file Function
-        $this->CreateJsonFile();
-
+       // $this->CreateJsonFile();
+        $AllList = Contacts::all();
         Session::flash('flash_message', 'Contact successfully deleted!');
 
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "Contact List"]
         ];
         return view('/content/contacts/contacts-List', [
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,  'AllList' => $AllList
         ]);
     }
 
     public function Detail($id)
     {
         $Contacts = Contacts::findOrFail($id);
-
-        Session::flash('flash_message', 'Contact successfully deleted!');
-
+        $AllList  = Contacts::all();
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Contacts"], ['name' => "Contact List"]
         ];
         return view('/content/contacts/contact-detail', [
-            'breadcrumbs' => $breadcrumbs , 'Contacts' => $Contacts
+            'breadcrumbs' => $breadcrumbs , 'Contacts' => $Contacts,  'AllList' => $AllList
         ]);
     }
 

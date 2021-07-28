@@ -1,21 +1,5 @@
 { "data":[
     {
-        "id": 24,
-        "first_name": "Amir",
-        "last_name": "Market",
-        "company_name": "Mind Company",
-        "email": "joinmyseo@gmail.com",
-        "home_phone": "923007272332",
-        "work_phone": "923007272332",
-        "mobile_phone": "923007272332",
-        "created_by_id": 1,
-        "compaign_id": null,
-        "list_id": 0,
-        "remember_token": null,
-        "created_at": "2021-07-16T17:53:47.000000Z",
-        "updated_at": "2021-07-16T17:53:47.000000Z"
-    },
-    {
         "id": 25,
         "first_name": "Amir",
         "last_name": "Market",
@@ -126,21 +110,5 @@
         "remember_token": null,
         "created_at": "2021-07-27T09:27:38.000000Z",
         "updated_at": "2021-07-27T09:27:38.000000Z"
-    },
-    {
-        "id": 32,
-        "first_name": "Amir",
-        "last_name": "Market",
-        "company_name": "Mind Company",
-        "email": "amirlucky40@yahoo.com",
-        "home_phone": "923007272332",
-        "work_phone": "923007272332",
-        "mobile_phone": "923007272332",
-        "created_by_id": 1,
-        "compaign_id": null,
-        "list_id": 0,
-        "remember_token": null,
-        "created_at": "2021-07-27T09:27:54.000000Z",
-        "updated_at": "2021-07-27T09:27:54.000000Z"
     }
 ]}

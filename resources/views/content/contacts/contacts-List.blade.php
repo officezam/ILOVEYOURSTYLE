@@ -33,6 +33,66 @@
 
         </div>
         <div class="card-datatable">
+
+          <table id="AllList" class="dt-multilingual table">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Home Phone</th>
+              <th>Work Phone</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($AllList as $product)
+              <tr>
+                <td>{{ $product->first_name.' '.$product->last_name  }}</td>
+                <td>{{ $product->company_name  }}</td>
+                <td>{{  $product->email }}</td>
+                <td>{{  $product->mobile_phone }}</td>
+                <td>{{ $product->home_phone  }}</td>
+                <td>{{ $product->work_phone  }}</td>
+                <td>
+
+
+                  <div class="d-inline-flex">
+                    <a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown">
+                      <i data-feather='more-vertical'></i>
+                      </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a href="/contacts/contact-detail/{{ $product->id  }}" class="dropdown-item">
+                        <i data-feather='book-open'></i> Detail</a>
+                      <a href="/contacts/delete-contact/{{ $product->id  }}" class="dropdown-item delete-record">
+                        <i data-feather='delete'></i> Delete</a>
+                      </div>
+                    </div>
+                  <a href="/contacts/update-contact/{{ $product->id  }} "class="item-edit">
+                    <i data-feather='edit'></i>
+                    </a>
+
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Home Phone</th>
+              <th>Work Phone</th>
+              <th>Action</th>
+            </tr>
+            </tfoot>
+          </table>
+
+
+
+{{--
           <table class="dt-multilingual table">
             <thead>
             <tr>
@@ -47,6 +107,7 @@
             </tr>
             </thead>
           </table>
+--}}
         </div>
       </div>
     </div>
@@ -74,5 +135,6 @@
 @endsection
 @section('page-script')
   {{-- Page js files --}}
-  <script src="{{ asset(mix('js/scripts/contacts/contact-list.js')) }}"></script>s
+  <script src="{{ asset(mix('js/scripts/contacts/all-list.js')) }}"></script>
+  {{--<script src="{{ asset(mix('js/scripts/contacts/contact-list.js')) }}"></script>--}}
 @endsection
